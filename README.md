@@ -228,6 +228,32 @@ linguist.py 里面有一些简单的 WordNet, NodeBox 封装。
 - 2017-3-22 使用 NodeBox 校对完成所有副词和形容词。
 - 2017-3-21 使用 NodeBox 校对完所有动词，并且添加动词各种时态。
 
+## MDX 词典制作
+
+项目中的 `make_mdx.py` 脚本可将 `ecdict.csv` 转换为 MDict 格式的 `.mdx` 词典文件，可在 GoldenDict、欧陆、MDict 等支持 MDX 格式的词典软件中使用。
+
+### 使用方式
+
+```bash
+./make_mdx.py                              # 全量词典 (768K 词条, ~17MB)
+./make_mdx.py -s                           # 仅保留单个单词 (403K 词条)
+./make_mdx.py -f 5000                      # FRQ 前 5000 热门词
+./make_mdx.py -c 3                         # 柯林斯 3 星及以上
+./make_mdx.py -s -f 10000                  # 单词语 + FRQ 前 10000
+./make_mdx.py -s -c 1 -f 20000             # 单词语 + 有评级 + FRQ 前 20000
+```
+
+### 参数说明
+
+| 参数 | 缩写 | 说明 |
+|------|------|------|
+| `--single-only` | `-s` | 仅保留单个单词（排除短语、带撇号/连字符开头的词） |
+| `--max-frq N` | `-f N` | 仅保留 FRQ 词频排名前 N 的词 |
+| `--min-collins N` | `-c N` | 最低柯林斯星级 (1-5) |
+| `--min-oxford N` | `-o N` | 最低牛津星级 (1-5) |
+
+输出的 `.mdx` 文件可直接在支持 MDX 格式的词典软件（MDict、GoldenDict、欧路词典等）中使用。
+
 ## Applications
 
 [T.vim](https://github.com/sicong-li/T.vim) vim 的翻译插件。
